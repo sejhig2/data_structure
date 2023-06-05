@@ -524,7 +524,6 @@ int move_block(int command)
 	return 0;
 }
 
-/* ������ �̵�, ȸ���ϱ� ���� �浹�Ǵ� �����̳� ���� ������ Ȯ���ϴ� �Լ�*/
 int collision_test(int command)
 {
 	int i, j;
