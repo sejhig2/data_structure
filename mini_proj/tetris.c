@@ -126,7 +126,6 @@ int main(void)
 	return 0;
 }
 
-/* �޴��� ������ */
 int display_menu(void)
 {
 	int menu = 0;
@@ -153,7 +152,6 @@ int display_menu(void)
 	return 0;
 }
 
-/* ���� ���۽� ȣ��Ǵ� �Լ�.   game������ �����Ͽ� ������ �����ϰų� ������ . ���� ���۽� refresh()�Լ��� �ݹ��Լ��� �����ǰ� Ÿ�̸Ӹ� �����. */
 int game_start(void)
 {
 	static struct sigaction sa;
@@ -192,8 +190,6 @@ int game_start(void)
 				timer.it_interval.tv_usec = 0;
 				setitimer(ITIMER_VIRTUAL, &timer, NULL);
 
-				// ��� ���Ϸ� ����
-
 				printf("\n\n Final score : %ld ", point);
 				printf("\n\n Please enter your name : ");
 				scanf("%s%*c", temp_result.name);
@@ -202,8 +198,8 @@ int game_start(void)
 				if (temp_result.point >= best_point)
 					best_point = temp_result.point;
 
-				ptime = time(NULL); // ���� �ð��� �� ������ ���
-				t = localtime(&ptime); // �� ������ �ð��� �и��Ͽ� ����ü�� �ֱ�
+				ptime = time(NULL);
+				t = localtime(&ptime);
 
 				temp_result.year = t->tm_year + 1900;
 				temp_result.month = t->tm_mon + 1;
@@ -288,27 +284,26 @@ int display_tetris_table(void)
 	return 0;
 }
 
-/*��Ʈ�������� �ʱ�ȭ �Ѵ�. ���� ������ ����*/
 int init_tetris_table(void)
 {
 	int i = 0, j = 0;
 
 	for (i = 0; i < 20; i++)
+//		전체 타일을 0으로
 		for (j = 1; j < 9; j++)
 			tetris_table[i][j] = 0;
-
+//양쪽 기둥 타일만 1
 	for (i = 0; i < 21; i++) {
 		tetris_table[i][0] = 1;
 		tetris_table[i][9] = 1;
 	}
-
+//바닥 타일만 1
 	for (j = 1; j < 9; j++)
 		tetris_table[20][j] = 1;
 
 	return 0;
 }
 
-/*���ڸ� �ٷ� �Է� ���� �� �ִ� �Լ�*/
 int getch(void)
 {
 	char ch;
@@ -343,7 +338,6 @@ int getch(void)
 	return (error == 1 ? (int) ch : -1);
 }
 
-/* Ÿ�̸ӿ� �ݹ��Լ��� ��ϵǾ� ��� ���ΰ�ħ �ϸ鼭 ȣ��Ǵ� �Լ�. Ű�Է� Ȯ��,  ȭ����ΰ�ħ, ���ٿϼ��˻���� ��� ���°� ������ Ȯ���ؾ� �Ǵ� �Լ��� ȣ���Ѵ� */
 int refresh(int signum)
 {
 	static int downcount = 0;
@@ -448,7 +442,6 @@ int refresh(int signum)
 	return 0;
 }
 
-/*�̵�, ȸ��Ű�� �ԷµǸ�, �浹�˻��� �̵���Ų��*/
 int move_block(int command)
 {
 	int i, j;
@@ -614,7 +607,6 @@ int collision_test(int command)
 	return 0;
 }
 
-/* �浹�Ǳ� ������ ������ �ٿ��Ų��.*/
 int drop(void)
 {
 	while(!collision_test(DOWN))
@@ -623,7 +615,6 @@ int drop(void)
 	return 0;
 }
 
-/* ������ �ϼ��Ǿ����� Ȯ���ϴ� �Լ�. �ϼ��Ǹ� ������ �����, ������ 1000���� ���Ѵ�*/
 int check_one_line(void)
 {
 	int i, j;
@@ -651,7 +642,6 @@ int check_one_line(void)
 	return 0;
 }
 
-/*�޴����� ��ϰ˻��� ȣ��Ǿ� �ⷯ���� �˻��ϴ� �Լ�*/
 int search_result(void)
 {
 	FILE *fp = NULL;
